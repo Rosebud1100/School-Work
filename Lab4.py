@@ -4,10 +4,6 @@ class Customer:
     def __init__(self):
         self.id = None
         self.name = None
-class Customer:
-    def __init__(self):
-        self.id = None
-        self.name = None
         self.acc_num = None
         self.balance = None
         self.credit_cards = []
@@ -15,7 +11,7 @@ class Customer:
         self.id = input("Enter Customer ID: ")
         self.name = input("Enter Customer Name: ")
         self.acc_num = input("Enter Customer Account Number: ")
-        self.balance = input("Enter Customer Balance: ")
+        self.balance = float(input("Enter Customer Balance: "))
     def transfer_funds(self,bene_customer, amount):
         self.balance -= amount
         bene_customer.balance += amount
@@ -43,32 +39,41 @@ class Card:
         print(self.cvv)
         print(self.expiry_date)
         print(self.balance)
+
 print("1. Create new Customer")
 print("2. Create new Card")
 print("3. Transfer funds")
 print("4. Card link")
 print("5. Display Customer Details & Card Details")
 print("6. Exit")
-customer = Customer()
-card = Card()
 while True:
     choice = int(input("Enter your choice: "))
     if choice == 1:
+        customer = Customer()
         customer.create_new_customer()
         myCustomerlist.append(customer)
-    if choice == 2:
+    elif choice == 2:
+        card = Card()
         card.create_new_card()
         myCardlist.append(card)
-    if choice == 3:
-        myCustomerlist[0].transfer_funds(myCustomerlist[1], 200)
-        print(myCustomerlist[0].display_customer_details())
-        print(myCustomerlist[1].display_card_details())
-    if choice == 4:
-        customer.card_link(card)
-    if choice == 5:
-        customer.display_customer_details()
-        card.display_card_details()
-    if choice == 6:
+    elif choice == 3:
+        sender_index = int(input("Enter sender customer index: "))
+        receiver_index = int(input("Enter receiver customer index: "))
+        amount = float(input("Enter amount to transfer: "))
+
+        myCustomerlist[sender_index].transfer_funds(myCustomerlist[receiver_index], amount)
+        myCustomerlist[sender_index].display_customer_details()
+        myCustomerlist[receiver_index].display_customer_details()
+    elif choice == 4:
+        if choice == 4:
+            cust_index = int(input("Enter customer index: "))
+            card_index = int(input("Enter card index: "))
+
+            myCustomerlist[cust_index].card_link(myCardlist[card_index])
+    elif choice == 5:
+        cust_index = int(input("Enter customer index: "))
+        card_index = int(input("Enter card index: "))
+        myCustomerlist[cust_index].display_customer_details()
+        myCardlist[card_index].display_card_details()
+    else:
         exit()
-
-
