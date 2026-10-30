@@ -1,0 +1,41 @@
+import tkinter
+root = tkinter.Tk()
+root.resizable(False, False)
+myCanvas = tkinter.Canvas(root, bg="white", height=600, width=800)
+shape1 = myCanvas.create_rectangle(20, 20, 100, 100, fill="blue")
+shape2 = myCanvas.create_rectangle(300,300 , 380, 380, fill="red")
+#initialize the constants xx, yy
+xx =yy = 3
+spd1 = 2
+spd2 = 6
+def move_shape():
+    global xx, yy
+    global spd1, spd2
+    #move the shape with the constanct xx, yy
+    myCanvas.move(shape1, xx, yy)
+    myCanvas.move(shape2, spd1, spd2)
+    #get the current coordinates of the shape
+    (x1, y1, x2, y2) = myCanvas.coords(shape1)
+    (x3, y3, x4, y4) = myCanvas.coords(shape2)
+    #check the boundaries of the coordinates and change the constants xx, yy
+    if x1 <= 0 or x2 >= 800:
+        xx = -xx
+    if y1 <= 0 or y2 >= 600:
+        yy = -yy
+    if x3 <= 0 or x4 >= 800:
+        spd1 = -spd1
+    if y3 <= 0 or y4 >= 600:
+        spd2 = -spd2
+    if x1 <= x3 or x2 >= x4:
+
+    if y1 <= y3 or y2 >= y4:
+
+
+    #call the function recursively
+    myCanvas.after(30, move_shape)
+
+
+#in the main program call the function move_shape()
+myCanvas.after(10,move_shape())
+myCanvas.pack()
+root.mainloop()
